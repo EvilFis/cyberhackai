@@ -1,0 +1,118 @@
+{% extends 'layout.html' %}
+
+    {% block body %}
+
+    <section class="container upSection">
+        
+        <div class="specification">
+            <a href="https://tfest.knastu.ru/docs/Положение%20Турнир-хакатон%20CyberHack.pdf" class="btnMy" target="_blank">Положение</a>
+
+            <div class="description width-360">
+                <h2 class="specification-header1 center">
+                    Даты проведения хакатона
+                </h2>
+                
+                <div class="specification-text">
+                  <h3 class="specification-header">дата начала</h3>
+                  <p class="specification-text__text description-text-good">{{open_time}} по UTC</p>
+                </div>
+
+                <div class="specification-text">
+                  <h3 class="specification-header">Дата окончания:</h3>
+                  <p class="specification-text__text description-text-bad">{{close_time}} по UTC</p>
+                </div>
+
+                <div class="specification-text">
+                  <h3 class="specification-header">Публикация таблицы лидеров:</h3>
+                  <p class="specification-text__text description-text-warning">{{lider_time}} по UTC</p>
+                </div>
+
+                <div class="specification-text">
+                  <h3 class="specification-header">Объявление победителей</h3>
+                  <p class="specification-text__text description-text-warning">{{winner_time}} по UTC</p>
+                </div>
+
+                <div class="specification-text">
+                  <p class="specification-text__text">дополнительную информацию читайте в положении</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="width-560">
+
+          <div class="btn_grooup">
+              {% if is_ready %}
+            <button class="btnMy btnMy-noHover w-80" disabled>
+              Младшая группа
+            </button>
+
+            <button class="btnMy btnMy-noHover w-80" disabled>
+              Старшая группа
+            </button>
+
+              {% else %}
+              <a href="https://junior.cyberhackai.ru" class="btnMy btn-update w-80">
+              Младшая группа
+            </a>
+
+              <a href="https://student.cyberhackai.ru" class="btnMy btn-update w-80">
+              Старшая группа
+            </a>
+              {% endif %}
+
+
+          </div>
+            
+          <div class="description">
+            <h1 class="description-header1 center">
+              Описание задачи
+          </h1>
+
+          <p class="description-text text">
+              Организатор Турнира – Компания АВ Софт, российский разработчик систем информационной безопасности с использованием AI/ML.
+                <br><br>
+            Участникам предстоит разработать предиктивную модель для обнаружения фишинговых сайтов по их URL адресам.
+            <br><br>
+            Участниками Турнира могут быть учащиеся с 9 по 11 класс общеобразовательных организаций и студенты высших образовательных учреждений.
+            <br><br>
+            Участие в Турнире – командное. Количество участников в одной команде – не более 3 человек.
+            <br><br>
+              Соревнования проводятся в следующих возрастных группах:</p>
+            <ul class="description-text text">
+              <li>младшая группа – 9-11 классы;</li>
+              <li>старшая – студенты высших образовательных
+            учреждений.</li>
+            </ul>
+              <p class="description-text text">
+              <br>
+              Мы определим победителей по приватной турнирной таблице. Обязательное условие — наличие воспроизводимого решения на любом языке программирования, которое предоставлено в течение 3 дней с момента завершения соревнования. При этом учитывается время на согласование технических условий и финальное воспроизведение модели.
+Каждый участник или команда может выбрать 2 решения, которые будут оцениваться в приватной турнирной таблице.
+После завершения соревнования и открытия приватной турнирной таблицы, участники или команды, занявшие места с 1 по 3, в течение 3 суток должны отправить нам исходный код модели, получившей максимальное значение метрики по приватной турнирной таблице и обеспечить достаточный объём технической информации об окружении, на котором можно воспроизвести результат.
+Если у вас нет целостного решения или его невозможно воспроизвести, нам придется вас дисквалифицировать. В таком случае участники с более низкими результатами автоматически поднимутся вверх по турнирной таблице.
+
+          </p>
+          </div>
+           
+        </div>
+    </section>
+
+     {% if error_message %}
+    <div class="errorInfo">
+
+        <a href="/" class="errorInfo-close">&#10006;</a>
+
+        {{ error_message }}
+    </div>
+    {% endif %}
+
+    {% if with_success %}
+    <div class="successInfo">
+
+        <a href="/" class="errorInfo-close">&#10006;</a>
+
+        {{ with_success }}
+    </div>
+
+    {% endif %}
+
+{% endblock %}

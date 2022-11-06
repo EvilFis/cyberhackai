@@ -1,0 +1,113 @@
+{% extends 'layout.html' %}
+
+    {% block header %}
+        {% if not is_closed %}
+        <a href="/submit" class="btnMy btn_link">Загрузить</a>
+        {% endif %}
+        <a href="/entry" class="btnMy btn_link">Моя лаборатория</a>
+
+
+    {% endblock %}
+
+    {% block body %}
+    <section class="container upSection">
+    
+        <div>
+            <div class="description">
+                <p class="description-text">
+                    Статус:
+                    {% if is_closed %}
+                    <span class="description-text-bad">закрыто</span>
+                    {% else %}
+                    <span class="description-text-good">открыто</span>
+                    {% endif %}
+                </p>
+                <p class="description-text">
+                    ДАТА СДАЧИ РАБОТ:
+                    {% if is_closed %}
+                    <span class='description-text-bad'>{{ close_time }}</span>
+                    {% else %}
+                    <span class='description-text-good'>{{ close_time }}</span>
+                    {% endif %}
+                    <span class='description-text-lower'>по</span>
+                    <span class='description-text-capitalize'>UTC</span>
+                </p>
+            </div>
+
+            <div class="description">
+                <h1 class="description-header1">
+                    Описание задачи
+                </h1>
+                <p class="description-text text">
+                    <span class="bold">Задание:</span> Необходимо разработать предиктивную модель, способную. С высоко долей вероятности классифицировать фишинговые и безопасные сайты по их url адресам. 
+                    <br>
+                    <br>
+                    <span class="bold">Проблема:</span> Фишинг - один из видов интернет-мошенничества, целью которого является получение доступа к конфиденциальным данным пользователей - логинам, паролям, данным лицевых счетов и банковских карт. 
+                    <br>
+                    <br>
+                    Фишинговые ссылки - это ссылки на мошеннические интернет-ресурсы, чаще всего на копии сайтов известных организаций, банков, интернет-магазинов, социальной сети и т. д.
+                    Обычно такие ссылки вам присылают по почте или в личном сообщении, например, в социальных сетях. Это или прямые ссылки, перейдя по которым вы попадаете на сайт, который почти ничем не отличается от настоящего, или ссылки с редиректом (переадресацией), перейдя по которым вы перенаправляетесь на другие сайты и в конечном итоге попадаете на ресурс мошенников.
+                    <br>
+                    <br>
+
+                </p>
+    
+                <h2 class="description-header2">
+                    Описание набора данных
+                </h2>
+
+                <p class="description-text text">
+                  Участники соревнования получают доступ к фишинговым и безопасным URL адресам, собранным АВ Софт. Данные представлены в формате csv.
+                  <br>
+                  Столбцы таблицы:
+                  <br>
+                  - url - URL-адрес<br>
+                  - label - Метка для каждого URL. 1 означает, что URL-адрес является фишинговым, и 0 означает, что безопасным.
+                  <br><br>
+                    Показателем оценки для этого соревнования является <span class="bold">categorical accuracy</span>. 
+                    Есть 2 категории: доброкачественный или хороший URL, который находится в 0 категории. В противном случае используется категория 1, что означает, что URL является вредоносным или фишинговым.
+                    Участникам разрешено использовать сторонние данные, если это не нарушает права третьих лиц, для повышения качества модели
+                    <br><br>
+                    Файл csv должен содержать заголовок и иметь следующий формат:
+                    <br> <span class="bold">
+                    url, label
+                    abcd.xyz,1
+                    abdc.com,0</span>
+
+                </p>   
+    
+            </div>
+        </div>
+        
+        <div class="mt-20 width-360">
+            <a href="/" class="btnMy">
+                вернуться обратно
+            </a>
+
+            <div class="table-lider">
+                <h3 class="header3">Итоговая таблица лидеров</h3>
+    
+                <table class="table table-striped table-sm">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Имя</th>
+                        <th scope="col">Итоговая оценка</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for user_id, score in participants %}
+                        <tr>
+                            <th scope="row">{{ loop.index }}</th>
+                            <td>{{ user_id }}</td>
+                            <td>{{ score }}</td>
+                        </tr>
+                     {% endfor %}
+                    </tbody>
+                  </table>
+    
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
